@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZYRON Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0f0f0f;
+  color: white;
+}
+header {
+  text-align: center;
+  padding: 20px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ff0055, #00f2ff);
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+.card {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  transition: 0.3s;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00f2ff;
+}
+.color-box {
+  height: 150px;
+  border-radius: 10px;
+}
+button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #00f2ff;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+.cart {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  background: #ff0055;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+</style>
+</head>
+<body>
+
+<header>ZYRON</header>
+
+<div class="cart">Cart: <span id="cart-count">0</span></div>
+
+<section class="products" id="product-list"></section>
+
+<script>
+const products = [
+  { color: "Red", code: "red" },
+  { color: "Black", code: "black" },
+  { color: "White", code: "white" },
+  { color: "Green", code: "green" },
+  { color: "Navy Blue", code: "navy" }
+];
+
+let cartCount = 0;
+
+function renderProducts() {
+  const container = document.getElementById('product-list');
+  container.innerHTML = '';
+
+  products.forEach((p, index) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    card.innerHTML = `
+      <div class="color-box" style="background:${p.code}"></div>
+      <h3>${p.color} T-Shirt</h3>
+      <p>$7</p>
+      <button onclick="addToCart(${index})">Add to Cart</button>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function addToCart(index) {
+  cartCount++;
+  document.getElementById('cart-count').innerText = cartCount;
+}
+
+// EASY EDIT SECTION
+// You can add more products like this:
+// products.push({ color: "Purple", code: "purple" });
+
+renderProducts();
+</script>
+
+</body>
+</html>
